@@ -32,3 +32,5 @@ if __name__=="__main__":
     for _ in range(size-1):
         enqueue((random.choice([('사용',9),('고장',3),('환불',4),('기타',1)])))
         print(queue)
+
+
