@@ -1,39 +1,34 @@
-def dequeue():
-    global size, front, rear, queue
-    if rear == front:
-        print("비엇습니다")
-        return
-    data=queue[0]
-    for i in range(1,size):
-        queue[i-1]=queue[i]
-        queue[i]=None
-    rear-=1
-    print(f'{data} 님 식당에 들어감')
+import random
 def enqueue(data):
-    global size, front, rear, queue
-    if rear==size-1:
-        print("꽉찼습니다.")
+    global size, queue, front, rear,count
+
+    if (rear+1)%size == front:
+        print("꽉 찼음.")
         return
-    rear+=1
+    rear=(rear+1)%size
     queue[rear]=data
+    count+=data[1]
+    print(f'귀하의 대기 시간은 {count}분 입니다.')
 
-if __name__ == "__main__":
-    rear,front=-1,-1
-    size=5
-    queue=[None for _ in range(size)]
-    customers= ['정국','뷔','지민','진','슈가']
-    for customer in customers:
-        enqueue(customer)
-    for _ in range(size):
-        print(f'대기줄 상태 : {queue}')
-        dequeue()
-    print(f'대기줄 상태 : {queue}')
-    print('식당 영업 종료!')
+def dequeue():
+    global size,queue,front,rear,count
 
+    if front==rear:
+        print("비었음")
+        return
+    front=(front+1)%size
+    data=queue[front]
+    queue[front]=None
+    count-=data[1]
+    print(f'귀하의 대기 시간은 {count}분 입니다.')
+    return data
 
-
-
-
-
-
-
+if __name__=="__main__":
+    size = 6
+    queue = [None for _ in range(size)]
+    front, rear = 0,0
+    customers=[]
+    count=0
+    for _ in range(size-1):
+        enqueue((random.choice([('사용',9),('고장',3),('환불',4),('기타',1)])))
+        print(queue)
