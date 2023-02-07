@@ -1,0 +1,6 @@
+1. 4
+2. enQueue, deQueue, front, rear
+3. 1)rear+=1 2)front+=1
+4. 2
+5. 2
+6. 1) return None 2) return queue[front+1]
